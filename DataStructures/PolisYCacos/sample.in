@@ -1,0 +1,20 @@
+nuevo_caco JUAN 20 bajo_la_mesa
+nuevo_caco JUAN 30 en_la_chimenea
+poli_busca_en bajo_la_mesa
+FIN
+descubre_nuevo_lugar PEDRO bajo_la_mesa
+poli_busca_en en_el_coche
+nuevo_caco JUAN 30 en_la_chimenea
+abandona_juego JUAN
+poli_busca_en en_la_chimenea
+FIN
+nuevo_caco JUAN 20 bajo_la_mesa
+descubre_nuevo_lugar JUAN en_la_chimenea
+cambia_lugar JUAN
+nuevo_caco PEDRO 30 bajo_la_mesa
+poli_busca_en bajo_la_mesa
+siguiente_poli
+abandona_juego PEDRO
+poli_busca_en en_la_chimenea
+siguiente_poli
+FIN
