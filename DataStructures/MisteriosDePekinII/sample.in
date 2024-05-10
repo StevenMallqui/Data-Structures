@@ -1,0 +1,30 @@
+HuangTai
+anyadir_rasgo HuangTai Gafas
+anyadir_rasgo HuangQiang Bigote
+nuevo_jugador Zhen
+nuevo_jugador Shui
+nuevo_jugador Qiong
+jugador_descarta Zhen Bigote
+ganadores_potenciales
+jugador_descarta Qiong Bigote
+ganadores_potenciales
+jugador_descarta Zhen Gafas
+ganadores_potenciales
+jugador_descarta Shui Bigote
+ganadores_potenciales
+jugador_descarta Shui Gafas
+ganadores_potenciales
+FIN
+HuangTai
+anyadir_rasgo HuangTai Alto
+nuevo_jugador Zhen
+nuevo_jugador Shui
+ganadores_potenciales
+nuevo_jugador Qiong
+ganadores_potenciales
+jugador_descarta Shui Alto
+ganadores_potenciales
+jugador_descarta Zhen Alto
+jugador_descarta Qiong Alto
+ganadores_potenciales
+FIN
