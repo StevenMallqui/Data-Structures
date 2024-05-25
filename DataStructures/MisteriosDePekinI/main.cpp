@@ -13,7 +13,6 @@ string culpable;
 */
 
 #include <stdio.h>
-
 #include<fstream>
 #include <iomanip>
 #include <iostream>
