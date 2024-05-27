@@ -204,7 +204,7 @@ void ListLinkedSingle<Elem>::display(std::ostream &out) const {
     out << head->next->value;
     Node *current = head->next->next;
     while (current != nullptr) {
-      out << "," << current->value;
+      out << ", " << current->value;
       current = current->next;
     }
   }

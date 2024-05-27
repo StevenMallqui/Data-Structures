@@ -19,12 +19,11 @@
 
 #include <cassert>
 #include <iostream>
-#include <string>
 
 class ListLinkedDouble {
 private:
   struct Node {
-    std::string value;
+    int value;
     Node *next;
     Node *prev;
   };
@@ -43,14 +42,14 @@ public:
 
   ~ListLinkedDouble() { delete_nodes(); }
 
-  void push_front(const std::string &elem) {
+  void push_front(const int &elem) {
     Node *new_node = new Node{elem, head->next, head};
     head->next->prev = new_node;
     head->next = new_node;
     num_elems++;
   }
 
-  void push_back(const std::string &elem) {
+  void push_back(const int &elem) {
     Node *new_node = new Node{elem, head, head->prev};
     head->prev->next = new_node;
     head->prev = new_node;
@@ -79,33 +78,33 @@ public:
 
   bool empty() const { return num_elems == 0; };
 
-  const std::string &front() const {
+  const int &front() const {
     assert(num_elems > 0);
     return head->next->value;
   }
 
-  std::string &front() {
+  int &front() {
     assert(num_elems > 0);
     return head->next->value;
   }
 
-  const std::string &back() const {
+  const int &back() const {
     assert(num_elems > 0);
     return head->prev->value;
   }
 
-  std::string &back() {
+  int &back() {
     assert(num_elems > 0);
     return head->prev->value;
   }
 
-  const std::string &operator[](int index) const {
+  const int &operator[](int index) const {
     assert(0 <= index && index < num_elems);
     Node *result_node = nth_node(index);
     return result_node->value;
   }
 
-  std::string &operator[](int index) {
+  int &operator[](int index) {
     assert(0 <= index && index < num_elems);
     Node *result_node = nth_node(index);
     return result_node->value;
@@ -207,21 +206,30 @@ std::ostream &operator<<(std::ostream &out, const ListLinkedDouble &l) {
 }
 
 void ListLinkedDouble::add_to(int index, int m){
-  Node *cur = head->next, *before;
+  Node *cur = head;
 
   for(int i = 0; i <= index; i++)
     cur = cur->next;
   cur->value += m;
 
+  Node *before;
   if(cur->value > cur->next->value){
+    before = cur->next;
+    while(before != head && cur->value > before->value)
+      before = before->next;
     detach(cur);
-    while(cur != head){
-    }
+    attach(cur, before);
   }else if(cur->value < cur->prev->value){
-    detach(cur);
-    while(cur != head){
+    if(cur->prev != head){
+      before = cur->prev;
+      while(before != head && cur->value < before->value)
+        before = before->prev;
+      before = before->next;
+      detach(cur);
+      attach(cur, before);
     }
   }
+
 }
 
 
