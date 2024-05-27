@@ -9,28 +9,32 @@ using namespace std;
 void resuelveCaso() {
    
    // leer los datos de la entrada
-   int N, elem; cin >> N;
-   ListLinkedSingle<int> xs, ys;
-   for(int i = 0; i < N; i++){
-      cin >> elem;
-      xs.push_back(elem);
+  int N, M, elem; cin >> N;
+  ListLinkedSingle<int> xs;
+  for(int i = 0; i < N; i++){
+    cin >> elem;
+    xs.push_back(elem);
+  }
+
+  cin >> M;
+  ListLinkedSingle<int> ys;
+  for(int i = 0; i < M; i++){
+    cin >> elem;
+    ys.push_back(elem);
+  }
+
+   if(N == 0){
+      while(!ys.empty())
+         ys.pop_front();
+   }else{
+      xs.difference(ys);
    }
 
-   if(N != 0){
-      cin >> N;
-      for(int i = 0; i < N; i++){
-         cin >> elem;
-         ys.push_back(elem);
-      }
-
-      xs.difference(ys);
-   }  
   // escribir solución
   xs.display();
-  cout <<" ";
+  cout <<' ';
   ys.display();
   cout << '\n';
-   
 }
 
 int main() {

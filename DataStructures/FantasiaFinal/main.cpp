@@ -115,11 +115,11 @@ bool villano_ataca(string v, string h){
 }
 
 bool heroe_ataca(string h, string a, string v){
-  if(!personajes.count(h) || personajes.at(h).tipo == 0)
-    throw invalid_argument("Heroe inexistente");
-
   if(!personajes.count(v) || personajes.at(v).tipo == 1)
     throw invalid_argument("Villano inexistente");
+
+  if(!personajes.count(h) || personajes.at(h).tipo == 0)
+    throw invalid_argument("Heroe inexistente");
 
   if(personajes[h].it != turnos.begin())
     throw invalid_argument("No es su turno");
