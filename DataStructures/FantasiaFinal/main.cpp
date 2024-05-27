@@ -34,7 +34,7 @@ private:
 
   unordered_map<personaje, infoPersonaje> personajes;
   list<personaje> turnos;
-
+ 
 public: 
 
 void aparece_villano(string v, int s, int a){
