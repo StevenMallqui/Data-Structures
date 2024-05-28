@@ -19,12 +19,11 @@
 
 #include <cassert>
 #include <iostream>
-#include <string>
 
 class ListLinkedDouble {
 private:
   struct Node {
-    std::string value;
+    int value;
     Node *next;
     Node *prev;
   };
@@ -43,14 +42,14 @@ public:
 
   ~ListLinkedDouble() { delete_nodes(); }
 
-  void push_front(const std::string &elem) {
+  void push_front(const int &elem) {
     Node *new_node = new Node{elem, head->next, head};
     head->next->prev = new_node;
     head->next = new_node;
     num_elems++;
   }
 
-  void push_back(const std::string &elem) {
+  void push_back(const int &elem) {
     Node *new_node = new Node{elem, head, head->prev};
     head->prev->next = new_node;
     head->prev = new_node;
@@ -79,33 +78,33 @@ public:
 
   bool empty() const { return num_elems == 0; };
 
-  const std::string &front() const {
+  const int &front() const {
     assert(num_elems > 0);
     return head->next->value;
   }
 
-  std::string &front() {
+  int &front() {
     assert(num_elems > 0);
     return head->next->value;
   }
 
-  const std::string &back() const {
+  const int &back() const {
     assert(num_elems > 0);
     return head->prev->value;
   }
 
-  std::string &back() {
+  int &back() {
     assert(num_elems > 0);
     return head->prev->value;
   }
 
-  const std::string &operator[](int index) const {
+  const int &operator[](int index) const {
     assert(0 <= index && index < num_elems);
     Node *result_node = nth_node(index);
     return result_node->value;
   }
 
-  std::string &operator[](int index) {
+  int &operator[](int index) {
     assert(0 <= index && index < num_elems);
     Node *result_node = nth_node(index);
     return result_node->value;
@@ -125,6 +124,8 @@ public:
   void display(std::ostream &out) const;
 
   void display() const { display(std::cout); }
+
+  void interseccion(const ListLinkedDouble &other);
 
 private:
   Node *head;
@@ -172,21 +173,42 @@ void ListLinkedDouble::copy_nodes_from(const ListLinkedDouble &other) {
 }
 
 void ListLinkedDouble::display(std::ostream &out) const {
-  out << "[";
   if (head->next != head) {
     out << head->next->value;
     Node *current = head->next->next;
     while (current != head) {
-      out << ", " << current->value;
+      out << " " << current->value;
       current = current->next;
     }
   }
-  out << "]";
+  out << "\n";
 }
 
 std::ostream &operator<<(std::ostream &out, const ListLinkedDouble &l) {
   l.display(out);
   return out;
 }
+
+void ListLinkedDouble::interseccion(const ListLinkedDouble &other){
+  Node *cur = head->next, *curOther = other.head->next;
+  while (cur != head){
+    if(cur->value < curOther->value || curOther == other.head){
+      Node *aux = cur;
+      cur = cur->next;
+      aux->prev->next = aux->next;
+      aux->next->prev = aux->prev;
+      delete aux;
+      num_elems--;
+    }else if(cur->value > curOther->value){
+      if(curOther != other.head)
+        curOther = curOther->next;
+    }else if(cur->value == curOther->value){
+      cur = cur->next;
+      if(curOther != other.head)
+        curOther = curOther->next;
+    }
+  }
+}
+
 
 #endif
