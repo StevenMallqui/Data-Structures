@@ -23,12 +23,12 @@ void resuelveCaso() {
     ys.push_back(elem);
   }
 
-   if(N == 0){
-      while(!ys.empty())
-         ys.pop_front();
-   }else{
-      xs.difference(ys);
-   }
+   // if(N == 0){
+   //    while(!ys.empty())
+   //       ys.pop_front();
+   // }else{
+       xs.difference(ys);
+   // }
 
   // escribir solución
   xs.display();

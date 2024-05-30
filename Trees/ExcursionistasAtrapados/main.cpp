@@ -10,22 +10,35 @@ using namespace std;
 
 // función que resuelve el problema
 template <typename T> pair<int,int> rescatar(const BinTree<T> &tree) {
-  if(tree.empty()){
-    return {-1, -1};
-  }else if(tree.left().empty() && tree.right().empty()){
-    return {1, tree.root()};
-  }else{
-    pair<int, int> cleft = rescatar(tree.left());
-    pair<int, int> cright = rescatar(tree.right());
-    int grupos, max;
-    if(cleft.first == -1 && cright.first > 0){
-      
-    }else if(cleft.first > 0 && cright.first == -1){
-    
-    }
-    return {grupos, max}
-  }
+   int grupos, maxG;
+   if(tree.empty()){
+      grupos = 0;
+      maxG = 0;
+   }else if(tree.right().empty() && tree.left().empty()){
+      if(tree.root())
+         grupos = 1;
+      else
+         grupos = 0;
+      maxG = tree.root();
+   }else{
+      auto[gruposIz, maxGIz] = rescatar(tree.left());
+      auto[gruposDer, maxGDer] = rescatar(tree.right());
+      maxG = max(maxGIz, maxGDer) + tree.root();
+      if(gruposIz > 0 && gruposDer > 0){
+         grupos = gruposIz + gruposDer;
+      }else if(gruposIz > 0 && gruposDer == 0){
+         grupos = gruposIz;
+      }else if(gruposIz == 0 && gruposDer > 0){
+         grupos = gruposDer;
+      }else if(gruposIz == 0 && gruposDer == 0){
+         if(maxG > 0)
+            grupos = 1;
+         else
+            grupos = 0;
+      }
+   }
 
+   return {grupos, maxG};
 }
 
 // resuelve un caso de prueba, leyendo de la entrada la
@@ -36,7 +49,7 @@ void resuelveCaso() {
    BinTree<int> tree = read_tree<int>(cin);
    // escribir solución
    pair<int,int> sol = rescatar(tree);
-   cout << sol.first << sol.second << '\n';
+   cout << sol.first <<" " << sol.second << '\n';
 }
 
 int main() {
